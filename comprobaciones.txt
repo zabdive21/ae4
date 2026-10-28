@@ -1,0 +1,28 @@
+--- ESTADO DE LOS SERVICIOS ---
+NAME          IMAGE                COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+ae4-app-1     ae4-app              "gunicorn config.wsg…"   app       18 seconds ago   Up 11 seconds (healthy)   8000/tcp
+ae4-db-1      postgres:16-alpine   "docker-entrypoint.s…"   db        18 seconds ago   Up 17 seconds (healthy)   5432/tcp
+ae4-nginx-1   nginx:1.27-alpine    "/docker-entrypoint.…"   nginx     18 seconds ago   Up Less than a second     0.0.0.0:8000->80/tcp, [::]:8000->80/tcp
+
+--- PRUEBA DE NGINX / APP ---
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><title>Despliegue completado</title></head>
+<body>
+<h1>Despliegue completado</h1>
+<p>Contenedor: <strong>449ebf7a9593</strong></p>
+<p>Visitas totales: <strong>1</strong></p>
+</body>
+</html>
+
+--- PRUEBA DE HEALTHCHECK ---
+{"status": "ok", "hostname": "449ebf7a9593"}
+--- PRUEBA DE BASE DE DATOS ---
+ count 
+-------
+    11
+(1 row)
+
+
+--- PRUEBA DE LA API JSON ---
+{"lugares": [{"id": 1, "name": "Tokio", "visited": false}, {"id": 2, "name": "Budapest", "visited": true}, {"id": 3, "name": "Nairobi", "visited": false}, {"id": 4, "name": "Berl\u00edn", "visited": true}, {"id": 5, "name": "Lisboa", "visited": true}, {"id": 6, "name": "Denver", "visited": false}, {"id": 7, "name": "Mosc\u00fa", "visited": false}, {"id": 8, "name": "Oslo", "visited": false}, {"id": 9, "name": "R\u00edo", "visited": true}, {"id": 10, "name": "Cincinnati", "visited": false}, {"id": 11, "name": "Helsinki", "visited": false}], "total": 11}
